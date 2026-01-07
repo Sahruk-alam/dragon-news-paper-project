@@ -1,24 +1,20 @@
 import { FaStar, FaRegEye, FaShareAlt, FaBookmark } from "react-icons/fa";
-import { useState } from "react";
+import { Link } from "react-router";
 
 const NewsCard = ({ news }) => {
-  const { title, rating, total_view, author, thumbnail_url, details, tags } =
+  const { id,title, rating, total_view, author, thumbnail_url, details, tags } =
     news;
-
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const date = new Date(author.published_date).toLocaleDateString();
 
-  // Function to truncate text to 90 words
+  // Function to truncate text to 50 words
   const getTruncatedText = (text, wordLimit = 50) => {
     const words = text.split(" ");
     if (words.length <= wordLimit) return text;
     return words.slice(0, wordLimit).join(" ") + "...";
   };
 
-  const displayText = isExpanded ? details : getTruncatedText(details);
-  const wordCount = details.split(" ").length;
-  const shouldShowReadMore = wordCount > 90;
+  const displayText = getTruncatedText(details);
 
   return (
     <div className="card bg-base-100 shadow-xl ">
@@ -50,16 +46,9 @@ const NewsCard = ({ news }) => {
           <img src={thumbnail_url} alt={title} />
         </figure>
 
-        <p className="text-sm text-gray-600 mt-3">{displayText}</p>
-
-        {shouldShowReadMore && (
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="text-primary font-semibold text-sm mt-2 w-fit hover:underline"
-          >
-            {isExpanded ? "Read Less" : "Read More"}
-          </button>
-        )}
+        <p className="text-sm text-gray-600 mt-3">{displayText}
+        </p>
+        <Link to = {`/news-details/${id}`} className="link-hover text-amber-700">Read more</Link>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mt-2">

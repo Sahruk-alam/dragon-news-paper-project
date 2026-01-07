@@ -24,7 +24,7 @@ const LayoutHome = () => {
 
       <main className="w-11/12 mx-auto  grid grid-cols-12 mt-8 gap-5">
 
-        <aside className="left_nav col-span-3">
+        <aside className="left_nav col-span-3 sticky top-10 h-fit">
           <LeftAside></LeftAside>
         </aside>
 
@@ -32,7 +32,7 @@ const LayoutHome = () => {
           <Outlet></Outlet>
         </section>
 
-        <section className="right_nav col-span-3">
+        <section className="right_nav col-span-3 sticky top-10 h-fit">
         <RightAside></RightAside>
         </section>
 

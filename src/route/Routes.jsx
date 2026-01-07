@@ -5,6 +5,10 @@ import Home from "../component/Navbar/Home";
 import About from "../component/Navbar/About";
 import Career from "../component/Navbar/Career";
 import CategoryNews from "../component/Navbar/CategoryNews";
+import Login from "../component/pages/Login";
+import Registration from "../component/pages/Registration";
+import AuthLayout from "../Layout/AuthLayout";
+import NewsDetails from "../component/pages/NewsDetails";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +29,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <div>Auth Page</div>,
+    element: <AuthLayout></AuthLayout>,
+    children:[
+      {
+        path:'/auth/login',
+        element:<Login></Login>
+      },
+      {
+        path:'/auth/registration',
+        element:<Registration></Registration>
+      }
+    ]
   },
+  {
+    path:'/news-details/:id',
+    element:<NewsDetails></NewsDetails>,
+    loader:()=>fetch('/news.json'), 
+  }
 
 ]);
 
