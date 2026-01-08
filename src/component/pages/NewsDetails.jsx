@@ -8,10 +8,10 @@ const NewsDetails = () => {
     const data=useLoaderData();
     const {id}=useParams();
     const [news,setNews]=useState([]);
-    console.log('news details data : ',news);
+    // console.log('news details data : ',news);
     useEffect(()=>{
         const newsFind=data.find(res=>res.id==id)
-        setNews(newsFind);
+            setNews(newsFind);
     },[data,id])
     return (
         <div>
