@@ -5,7 +5,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 const Navbar = () => {
     const {user,signoutUser}=use(AuthContext)
     const handleLogout=()=>{
-        console.log('Logout clicked');
+    //  console.log('Logout clicked');
         signoutUser()
         .then(()=>{
             alert('User logged out successfully')
@@ -25,7 +25,10 @@ const Navbar = () => {
             <NavLink to ='/career'>Career</NavLink>
            </div>
            <div className="flex items-center gap-4">
-              <img src={userLogo} alt="User" />
+            {
+                <img className='p-.5 w-12 bg-base-300 rounded-full' src={`${user?.photoURL || userLogo}`} alt="User" />
+            }
+              
 
               {
                user ? <button onClick={handleLogout} className='btn btn-primary px-8'>Logout</button> : 

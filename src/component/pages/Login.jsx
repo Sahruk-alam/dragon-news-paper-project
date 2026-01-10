@@ -1,23 +1,34 @@
-import React, { use } from 'react';
-import { Link } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
   const {signInUser}=use(AuthContext)
+  const location=useLocation();
+  // console.log(location);
+  const navigate=useNavigate()
+  const [error,setError]=useState('');
     const handleLogin=(event)=>{
         event.preventDefault();
       const email=event.target.email.value;
       const password=event.target.password.value;
-      console.log('Login info:',email,password);
+
+      if(password.length<6){
+        setError('Password must be at least 6 characters long.');
+        return;
+      }else{
+        setError('');
+      }
       signInUser(email,password)
       .then(result=>{
-        console.log(result.user);
+        // console.log(result.user);
         event.target.reset();
+        navigate(location?.state || '/')
       })
       .catch((error)=>{
-        const errorMessage = error.message;
+        const errorMessage = error.code;
         console.log(errorMessage);
-        alert(errorMessage);
+        setError('Invalid email or password');
     })
     }
     return (
@@ -28,10 +39,13 @@ const Login = () => {
         <fieldset className="fieldset">
             
           <label className="label font-bold">Email address</label>
-          <input type="email" name='email' className="input" placeholder="Enter your Email" />
+          <input type="email" name='email' required className="input" placeholder="Enter your Email" />
           <label className="label font-bold">Password</label>
-          <input type="password" name='password' className="input" placeholder="Enter your Password" />
+          <input type="password" name='password' required className="input" placeholder="Enter your Password" />
           <div><a className="link link-hover">Forgot password?</a></div>
+          {
+            error && <p className='text-red-600 font-semibold'>{error}</p>
+          }
           <button className="btn btn-neutral mt-4">Login</button>
 
           <p className='text-center font-semibold pt-3'>Don't have an account? 
