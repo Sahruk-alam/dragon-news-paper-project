@@ -3,7 +3,7 @@ import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
-  const {signInUser}=use(AuthContext)
+  const {signInUser, forgetPassword}=use(AuthContext)
   const location=useLocation();
   // console.log(location);
   const navigate=useNavigate()
@@ -24,12 +24,27 @@ const Login = () => {
         // console.log(result.user);
         event.target.reset();
         navigate(location?.state || '/')
+        
+
+        
       })
       .catch((error)=>{
         const errorMessage = error.code;
         console.log(errorMessage);
         setError('Invalid email or password');
     })
+    }
+    const handleForget=(e)=>{
+      e.preventDefault();
+      const email=e.target.email.value; 
+      forgetPassword(email)
+      .then(() => {
+        alert('Password reset email sent. Please check your inbox.');
+      })
+      .catch((error) => {
+        console.error('Error sending password reset email:', error);
+        alert('Failed to send password reset email. Please try again later.');
+      });
     }
     return (
         <div className='flex justify-center items-center min-h-screen'>
@@ -42,7 +57,7 @@ const Login = () => {
           <input type="email" name='email' required className="input" placeholder="Enter your Email" />
           <label className="label font-bold">Password</label>
           <input type="password" name='password' required className="input" placeholder="Enter your Password" />
-          <div><a className="link link-hover">Forgot password?</a></div>
+          <div><a onClick={handleForget} className="link link-hover">Forgot password?</a></div>
           {
             error && <p className='text-red-600 font-semibold'>{error}</p>
           }

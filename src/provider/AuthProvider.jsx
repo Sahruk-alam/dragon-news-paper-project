@@ -1,14 +1,26 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth/cordova';
 import React, { createContext, useEffect, useState } from 'react';
 import { auth } from '../component/firebase/firebase.config';
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
-
+import { GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { GithubAuthProvider } from "firebase/auth";
 export const AuthContext =createContext()
+const provider=new GoogleAuthProvider()
+const providerGit = new GithubAuthProvider();
+
 const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null)
     const [loading,setLoading]=useState(true)
-
-    // console.log( user,loading);
+const githubSign=()=>{
+    setLoading(true)
+    return signInWithPopup(auth,providerGit)
+}
+const forgetPassword=(email)=>{
+    return sendPasswordResetEmail(auth,email)
+}
+const googleSign=()=>{
+        setLoading(true)
+        return signInWithPopup(auth,provider)
+    }
 const createUser=(email,password)=>{
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
@@ -42,7 +54,10 @@ const signInUser=(email,password)=>{
         signInUser,
         loading,
         setLoading,
-        updateUser
+        updateUser,
+        googleSign,
+        githubSign,
+        forgetPassword
     }
     return <AuthContext value={authData}>
         {children}

@@ -18,7 +18,7 @@ const Navbar = () => {
     return (
         <div className='flex justify-between items-center'>
            
-           <div className="left-nav"> {user && user.email} </div>
+           <div className="left-nav"> {user && user.email } </div>
            <div className="main-nav gap-2.5 text-accent flex ">
             <NavLink to ='/' >Home</NavLink>
             <NavLink to ='/about' >About</NavLink>

@@ -27,6 +27,14 @@ const router = createBrowserRouter([
         loader:()=>fetch('/news.json'),
         hydrateFallbackElement:<Loading></Loading>
       },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
+      {
+        path: "/career",
+        element: <Career></Career>,
+      }
       
     ],
   },
