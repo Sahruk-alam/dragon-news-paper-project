@@ -1,9 +1,10 @@
-import React, { use, useState } from 'react';
+import React, { use, useRef, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
   const {signInUser, forgetPassword}=use(AuthContext)
+  const emailRef=useRef();
   const location=useLocation();
   // console.log(location);
   const navigate=useNavigate()
@@ -36,7 +37,8 @@ const Login = () => {
     }
     const handleForget=(e)=>{
       e.preventDefault();
-      const email=e.target.email.value; 
+      const email=emailRef.current.value;
+      console.log("Email", email);
       forgetPassword(email)
       .then(() => {
         alert('Password reset email sent. Please check your inbox.');
@@ -54,7 +56,7 @@ const Login = () => {
         <fieldset className="fieldset">
             
           <label className="label font-bold">Email address</label>
-          <input type="email" name='email' required className="input" placeholder="Enter your Email" />
+          <input type="email" ref={emailRef} name='email' required className="input" placeholder="Enter your Email" />
           <label className="label font-bold">Password</label>
           <input type="password" name='password' required className="input" placeholder="Enter your Password" />
           <div><a onClick={handleForget} className="link link-hover">Forgot password?</a></div>

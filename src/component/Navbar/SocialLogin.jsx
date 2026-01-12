@@ -7,7 +7,7 @@ const SocialLogin = () => {
      const handleGoogleSign=()=>{
      googleSign()
      .then(result=>{
-        console.log("Google pop up",result)
+        console.log("Google pop up",result.user)
      })
      .catch(error=>{
         console.log(error)
