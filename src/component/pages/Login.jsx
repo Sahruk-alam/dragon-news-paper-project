@@ -1,12 +1,13 @@
 import React, { use, useRef, useState } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
+import SocialLogin from '../Navbar/SocialLogin';
 
 const Login = () => {
   const {signInUser, forgetPassword}=use(AuthContext)
   const emailRef=useRef();
   const location=useLocation();
-  // console.log(location);
+  // console.log(user);
   const navigate=useNavigate()
   const [error,setError]=useState('');
     const handleLogin=(event)=>{
@@ -25,8 +26,7 @@ const Login = () => {
         // console.log(result.user);
         event.target.reset();
         navigate(location?.state || '/')
-        
-
+       
         
       })
       .catch((error)=>{
@@ -70,8 +70,14 @@ const Login = () => {
         </fieldset>
         
       </form>
+      <div className="p-2.5">
+        <SocialLogin></SocialLogin>
+      </div>
+      
     </div>
-        </div>
+   
+   
+               </div>
     );
 };
 

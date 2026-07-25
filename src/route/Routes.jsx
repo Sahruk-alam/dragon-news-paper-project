@@ -53,9 +53,10 @@ const router = createBrowserRouter([
   },
   {
     path:'/news-details/:id',
-    element:<PrivateRRoute>
-      <NewsDetails></NewsDetails>
-    </PrivateRRoute>,
+    element:
+    <PrivateRRoute>
+      <NewsDetails></NewsDetails>,
+     </PrivateRRoute>,
     loader:()=>fetch('/news.json'), 
     hydrateFallbackElement:<Loading></Loading>
   }

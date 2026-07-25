@@ -1,6 +1,7 @@
 import React, { use, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
+import SocialLogin from "../Navbar/SocialLogin";
 
 const Registration = () => {
   const { createUser, setUser, updateUser } = use(AuthContext);
@@ -125,6 +126,9 @@ const Registration = () => {
             </p>
           </fieldset>
         </form>
+        <div className="p-2.5">
+        <SocialLogin></SocialLogin>
+      </div>
       </div>
     </div>
   );

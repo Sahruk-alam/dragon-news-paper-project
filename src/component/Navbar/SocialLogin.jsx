@@ -2,6 +2,7 @@ import React, { use, useContext } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link } from 'react-router';
 const SocialLogin = () => {
      const {googleSign,user,githubSign,setUser}=useContext(AuthContext)
      const handleGoogleSign=()=>{
@@ -47,11 +48,11 @@ const SocialLogin = () => {
             <div className='space-y-3 mt-5'>
                 
                 {
-                    user ? null : <button onClick={handleGoogleSign} className='btn btn-outline btn-secondary w-full'><FcGoogle size={24} />Login with Google</button>
+                    user ? null : <Link to="/" onClick={handleGoogleSign} className='btn btn-outline btn-secondary w-full'><FcGoogle size={24} />Login with Google</Link>
                 }
                 
                 {
-                    user ? null : <button onClick={handleGithub} className='btn btn-outline btn-primary w-full'><FaGithub size={24} />Login with Github</button>
+                    user ? null : <Link to="/" onClick={handleGithub} className='btn btn-outline btn-primary w-full'><FaGithub size={24}  />Login with Github</Link>
                 }
                
             </div>

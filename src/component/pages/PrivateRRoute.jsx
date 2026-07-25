@@ -11,7 +11,7 @@ const PrivateRRoute = ({ children }) => {
         return <Loading></Loading>
     }
 
-     if(user && user?.email ){
+     if(user && user?.email || user?.displayName || user?.providerData?.uid){
          return children;
      }
    
